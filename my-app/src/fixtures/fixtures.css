@@ -1,0 +1,183 @@
+#root {
+   vertical-align: top;
+}
+.game-div {
+   margin-bottom: 5rem;
+   background-color: #f6f6f6;
+}
+#topId {
+   display: -webkit-flex;
+   display: -webkit-box;
+    display: flex;
+    flex-direction: column;
+    font-size: 9px;
+    padding: 2px 5px;
+    color: rgb(65 65 65);
+ }
+ .server-time {
+    color: rgb(122 153 44);
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    justify-content: flex-end;
+ }
+ .dateDiv {
+   display: -webkit-flex;
+   display: -webkit-box;
+    display: flex;
+    padding: 0.5rem 0rem;
+ }
+ .show {  display: block;   }
+ .hide, .sec-main-div {  display: none; }
+ .date {
+    margin: 0px;
+    width: 81%;
+    overflow: auto;
+    white-space: nowrap;
+ }
+ #realDate {
+    font-size: 11px;
+ }
+ .toda {
+    background-color: #766b96;
+    border: 1px solid #343363;
+    color: white;
+    font-weight: 500;
+ }
+ .toda:hover, .toda:focus {
+    background-color: rgb(124, 151, 201);
+ }
+ .dateText {
+    font-weight: 500;
+    font-size: small;
+    color: #93184C;
+    margin-right: 5px;
+ }
+ .error-div {
+    text-align: center;
+    padding: 10%;
+ }
+ .error-div p {
+    color: rgb(88, 64, 33);
+    font-size: medium;
+    font-weight: 500;
+ }
+ .group1 {
+    font-size: 15px;
+    padding: 5px 5px;
+    font-weight: 600;
+    font-family: "Roboto", "Open-sans", sans-serif;
+    background-color: rgb(36 36 131);
+    border: 1px solid #C7C4C5;
+    border-style: solid none;
+    color: rgb(255, 255, 255);
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    align-items: center;
+ }
+ .group1 img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 10px;
+    justify-self: flex-start;
+ }
+ .img-border {
+    border: 1px solid #9292f2;
+    border-radius: 50%;
+    height: auto;
+ }
+ .group1 img[alt] {
+   font-size: 0px;
+ }
+ .group1 div {
+   flex-grow: 1;
+ }
+ .group {
+    padding: 0px 0px 4px;
+ }
+ .clubs {
+   padding: 8px 4%;
+   border-bottom: 1px solid gainsboro;
+ }
+ .clubs table { font-size: 0.8em }
+ .td {
+   width: 42%;
+   padding: 0px 5px;
+ }
+ .clubs a {
+   color: #343363;
+ }
+ .clubs a:hover, .clubs a:focus {
+   color: crimson;
+   text-decoration: underline;
+ }
+ .clubs a:active {
+   color: #343363;
+ }
+ .clubs a:visited {
+   color: crimson;
+ }
+ .center { text-align: center }
+ .clubs td:first-child {
+   text-align: right;
+ }
+ .clubs td:last-child {
+   text-align: left;
+ }
+ .scoreUpdate {
+   background-color: brown;
+   color: cornsilk
+ }
+ .game {
+    position: relative;
+    width: 100%;
+ }
+ .matchTime {
+   font-size: 10px;
+   text-align: center;
+   display: inline-block;
+   background-color: blanchedalmond;
+   color: crimson;
+   padding: 2px 4px;
+ }
+ .clubs span {
+   margin: 0px 3px;
+ }
+ hr { margin: 10px; } 
+ @media (min-width: 400px) {
+    #topId {
+       flex-direction: row;
+       justify-content: space-between;
+       align-items: center;
+       padding: 7px 2px;
+    }
+    p {
+       font-size: 0.8rem;
+    }
+    .group1 {
+          text-align: left;
+          justify-content: flex-start;
+    }
+ }
+ @media (min-width: 800px) {
+    .realDate { font-size: 13px; }
+    #topId {
+      font-size: 12px;
+   }
+ }
+ @media (min-width: 950px) {
+   .flex-game-ad {
+      display: -webkit-flex;
+      display: -webkit-box;
+      display: flex;
+   }
+   .game-div {
+      display: inline-block;
+      width: 70%;
+   }
+   .table-side-section {
+      width: 30%;
+      display: inline-block;
+   }
+ }
