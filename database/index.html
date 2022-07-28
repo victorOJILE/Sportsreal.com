@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="divisions divisions2">
+        <form action="/saveTopImage" method="post" enctype="multipart/form-data" target="_self">
+            <label for="top-img" id="top-img-btn"><i class="fa fa-upload"></i> Add top image</label>
+            <input type="file" name="myFile" id="top-img">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</body>
+<script>
+    // function submit() {
+    //     let form = document.forms[0];
+    //     form.onsubmit = () => {
+    //         let formData = new FormData(form);
+    //         fetch('/saveTopImage', {
+    //             method: "POST",
+    //             body: formData
+    //         }).then(response => response.json())
+    //         .then(result => console.log(result)).catch(err => console.error(err));
+    //     }
+    // }
+</script>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportsreal CMS</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="../login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        Sportsreal CMS
+    </header>
+    <section class="body">
+        <div class="user-notification"><i class="fa fa-user"></i> Writers dashboard</div>
+        <div class="heading">
+                <h3>Story Heading:</h3>
+                <textarea id="story-heading" class="white" placeholder="Write story header or topic here"></textarea></div>
+            <div class="flex-divs">
+                <div class="divisions">
+                    <label for="catgry">Category:</label>
+                    <input list="category" id="catgry" class="white"  value="" required>
+                    <datalist  id="category">
+                        <option value="English Premier League" selected>English Premier League</option>
+                        <option value="Spanish La Liga">Spanish La Liga</option>
+                        <option value="German BundesLiga">German BundesLiga</option>
+                        <option value="Italian Serie A">Italian Serie A</option>
+                        <option value="German BundesLiga">German BundesLiga</option>
+                    </datalist>
+                </div>
+                <div class="divisions">
+                    <label for="author">Author:</label>
+                    <input list="writers" id="author" class="white" value="Sportsreal Team" required>
+                    <datalist  id="writers">
+                        <option value="Sportsreal Team">Sportsreal Team</option>
+                        <option value="Victor Ojile">Victor Ojile</option>
+                        <option value="Olanrewaju Efuwape">Olanrewaju Efuwape</option>
+                        <option value="John Mercy">John Mercy</option>
+                    </datalist>
+                </div>
+
+            </div>
+            <div class="flex">
+                <div id="top-image">
+                    <i class="fa fa-file-photo-o" style="font-size: 400%;"></i><br>
+                    <center><h5>No main image</h5></center>
+                </div>
+                <div class="division-group">
+                    <form onsubmit="return false;" enctype="multipart/form-data" name="main_Image_Input">
+                        <div class="divisions divisions2">
+                            <label for="top-img" id="top-img-btn" tabindex="0"><i class="fa fa-upload"></i> Add top image</label>
+                            <input type="file" name="topImage" id="top-img" tabindex="-1">
+                        </div>
+                    </form>
+                    <div class="divisions divisions2">
+                        <label for="image-credit" style="width: 100%;">Add image credit</label><br>
+                        <textarea id="image-credit" class="white" maxlength="70"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="news-body">
+                <div class="enter-news""><h3><i class="fa fa-edit"></i> Enter news body here</h3><button title="Help" type="button" id="help">Help <i class="fa fa-question-circle"></i></button></div>
+                <div class="edit-text">
+                    <button title="Bold" type="button" value="0"><i class="fa fa-bold"></i></button>
+                    <button title="Italic" type="button" value="1"><i class="fa fa-italic"></i></button>
+                    <button title="Underline" id="underline" type="button" value="2"><i class="fa fa-underline"></i></button>
+                    <button title="Insert link" type="button" style="color: rgb(9, 20, 126)" id="hyperlink" value="3"><i>H</i></button>
+                    <button title="Numbering" id="numbering" type="button" value="4"><b><i class="fa fa-list-ol"></i></b></button>
+                    <button title="Bulleting" id="bulleting" type="button" value="5"><b><i class="fa fa-list-ul"></i></b></button>
+                    <button title="Quotes" id="quote" type="button" value="6"><i class="fa fa-quote-left"></i><i class="fa fa-quote-right"></i></button>
+                </div>
+                <div class="edit-text">
+                    <button title="Header 1" id="h1" type="button" value="7"><b>H1</b></button>
+                    <button title="Header 2" id="h2" type="button" value="8"><b>H2</b></button>
+                    <button title="Header 3" id="h3" type="button" value="9"><b>H3</b></button>
+                    <button title="Header 4" id="h4" type="button" value="10"><b>H4</b></button>
+                    <button title="Header 5" id="h5" type="button" value="11"><b>H5</b></button>
+                    <button title="Header 6" id="h6" type="button" value="12"><b>H6</b></button>
+                </div>
+                <textarea class="textarea" class="white" id="post-body" placeholder="Write story here..."></textarea>
+                <form action="/saveOtherImages" enctype="multipart/form-data" name="saveOtherImages">
+                    <div class="divisions" style="width: 100%; max-width: 100%;" id="otherImgDivision">
+                        <div id="images" class="images">
+                            <h5 style="display: flex; align-items: center;"><i class="fa fa-info-circle" style="font-size: 2em; margin-right: 10px;"></i> Posts can have other images. Click the button below to add extra images to your post</h5>
+                        </div>
+                        <div id="image-type-div">
+                            <button class="image-type bord-left-rad" type="button" data-image-type="single"><i class="fa fa-file-o"></i> Single image</button>
+                            <button class="image-type bord-right-rad active-img-type" type="button" data-image-type="group"><i class="fa fa-files-o"></i> Group images</button>
+                        </div>
+                        <label for="other-img-file1" id="other-img" tabindex="0"><i class="fa fa-upload"></i> Add other images</label>
+                        <input type="file" name="other-img" id="other-img-file1" tabindex="-1">
+                    </div>
+                    <div class="images" style="padding: 15px 10px; margin: 0px 10px; border: 1px solid gainsboro;"><h5 style="display: flex; align-items: center;"><i class="fa fa-warning" style="font-size: 2em; margin-right: 10px;"></i>Make sure you put your insertion point where you want to insert the image before clicking the above button to correctly insert the image in your the right place (in your post).</h5></div>
+                </form>
+                <div class="divisions" style="margin-top: 30px;"><i class="fa fa-tags"></i> Add tags to your post.<br>
+                    <input type="text" class="white" maxlength="25" placeholder="Double space to add tag" id="tags">
+                    <small style="display: block; padding: 10px 0px 5px; color: #17a2b8;"><i class="fa fa-info-circle" style="font-size: 1.2em; margin-right: 5px"></i>You can double click on tags to remove it.</small>
+                    <div id="tags-div"></div>
+                </div>
+            </div>
+        </section>
+        <div class="load-page">
+            <button id="checkPage" class="load-page-ex" type="button">Preview post</button><button class="load-page-ex load-page-ex-oth" type="button" id="submit-post">Submit Post</button>
+        </div>
+    
+        <iframe name="iframe1"> </iframe>
+    <div class="help-modal" id="help-modal">
+        <div class="help-modal2">
+            <div class="help-text"><div>Help <span style="color: rgb(243, 31, 31); font-weight: 600;">?</span></div><div class="close-help" onclick="helpModal.style.display = 'none'; helpModal.style.transform = 'scale(0)'; document.body.style.overflow = 'auto';">X</div></div>
+        <div class="bdy">
+        <div class="help-descr">The information here is all about creating a new post body.</div>
+        <div class="edit-text">
+            <button title="Bold" disabled><b>B</b></button>
+            <button title="Italic" disabled><b><i>I</i></b></button>
+            <button disabled style="text-decoration: underline;" title="Underline"><b>U</b></button>
+            <button disabled title="Insert link" style="color: rgb(9, 20, 126)"><i>H</i></button>
+            <button title="Numbering" disabled><b>1</b></button>
+            <button title="Bulleting" disabled><b>.</b></button>
+            <button title="Quotes" disabled><q>''</q></button>
+        </div>
+        <div class="edit-text">
+            <button title="Header 1" disabled><b>H1</b></button>
+            <button title="Header 2" disabled><b>H2</b></button>
+            <button title="Header 3" disabled><b>H3</b></button>
+            <button title="Header 4" disabled><b>H4</b></button>
+            <button title="Header 5" disabled><b>H5</b></button>
+            <button title="Header 6" disabled><b>H6</b></button>
+        </div>
+        <ol type="1" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Bold</b>
+                    <button title="Bold" disabled><b>B</b></button>
+                </div>
+                <p>To enter a bold text:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on "B" button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value.</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="2" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Italic </b>
+                    <button title="Italic" disabled><b><i>I</i></b></button>
+                </div>
+                <p>To enter an Italic text:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on " <i>I</i> " button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value.</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="3" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Underline </b>
+                    <button disabled style="text-decoration: underline;" title="Underline text"><b>U</b></button>
+                </div>
+                <p>To underline a  text:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on " <under-line style="text-decoration: underline;">U</under-line> " button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value.</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="4" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Hyperlink </b>            
+                    <button disabled title="Insert link" style="color: rgb(9, 20, 126)"><i>H</i></button>
+                </div>
+                <p>To insert a hyperlink:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on " <i style="color: blue;">H</i> " button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write or paste link here" with the url.</li>
+                    <li>Finally, replace "Write here..." with your own value.</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="5" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Numbering (Ordered list)</b>            
+                    <button title="Numbering" disabled><b>1</b></button>
+                </div>
+                <p>To enable automatic numbering:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on " 1 " button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value that should be on that list number.</li>
+                    <li>To continue numbering, place your insertion point after "&lt;/li&gt;" (no space) and click "Enter".</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="6" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Bulleting (Unordered list)</b>            
+                    <button title="Bulleting" disabled><b>.</b></button>
+                </div>
+                <p>To enable automatic bulleting:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on " . " button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value that should be on that list bullet.</li>
+                    <li>To continue with bullets, place your insertion point after "&lt;/li&gt;" (no space) and click "Enter".</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="7" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Quotes</b>
+                    <button title="Quotes" disabled><q>''</q></button>
+                </div>
+                <p>To insert quotes, e.g <q>This text is quoted</q>:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on " <q>''</q> " button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value.</li>
+                </ul>
+            </li>
+        </ol>
+        <ol start="8" class="ol">
+            <li>
+                <div class="edit-text">
+                    <b>Heading</b>
+                    <button title="Header 1" disabled><b>H1</b></button>
+                    <button title="Header 2" disabled><b>H2</b></button>
+                    <button title="Header 3" disabled><b>H3</b></button>
+                    <button title="Header 4" disabled><b>H4</b></button>
+                    <button title="Header 5" disabled><b>H5</b></button>
+                    <button title="Header 6" disabled><b>H6</b></button>
+                </div>
+                <br>
+                    <h1 class="inlines">This is an H1 text.</h1><br>
+                    <h2 class="inlines">This is an H2 text.</h2><br>
+                    <h3 class="inlines">This is an H3 text.</h3><br>
+                    <h4 class="inlines">This is an H4 text.</h4><br>
+                    <h5 class="inlines">This is an H5 text.</h5><br>
+                    <h6 class="inlines">This is an H6 text.</h6>
+                <p>To insert headers:</p>
+                <ul>
+                    <li>Make sure the insertion point is at the right place.</li>
+                    <li>Click on the desired header type button, a snippet will show up where you placed your insertion point.</li>
+                    <li>Replace "Write here..." with your own value.</li>
+                </ul>
+            </li>
+        </ol>
+        </div>
+        </div>
+        
+        </div>
+    </div>
+    <script src="../index.js"></script>
+    <script src="../textarea.js"></script>
+</body>
+</html>

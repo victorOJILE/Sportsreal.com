@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post preview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <base href="http://localhost:3001" />
+</head>
+<style>
+@font-face { font-family: 'Poppins'; src: url(./fonts/Poppins-Regular.ttf); }
+@font-face { font-family: 'Roboto'; src: url(./fonts/Roboto-Light.ttf); }
+:root {
+  --bodyBackground: rgb(250 250 250);
+  --borderColor: #efefef;
+  --siteColor: rgb(8, 8, 32);
+}
+/*
+|----------------------------------------------------------------------------|
+    GENERAL STYLES
+|----------------------------------------------------------------------------|
+*/
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  margin: 0px;
+  background-color: initial;
+  border: none;
+  outline: none;
+}
+* { margin: 0; box-sizing: border-box; padding: 0; }
+html { scroll-behavior: smooth }
+body {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+  position: relative;
+  font-family:  "Merriweather",'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  background: repeating-linear-gradient(34deg, rgb(255, 255, 255) 0px, var(--bodyBackground) 2px);
+}
+under-line { text-decoration: underline }
+ol, ul { list-style: none }
+blockquote,
+q { quotes: none }
+blockquote::before, blockquote::after, q::before, q::after { content: ""; content: none }
+table { border-collapse: collapse; border-spacing: 0 }
+.empty-div {
+ height: 80px;
+ text-align: center;
+ background-color: white;
+ vertical-align: middle;
+ border: 1px solid var(--borderColor);
+}
+.loading { font-size: 19px; display: inline-block; }
+a { text-decoration: none; color: initial }
+b { font-weight: 600 !important }
+.show { display: block }
+.hide { display: none } 
+.fa { cursor: pointer; text-align: center }
+.fa-facebook, .fa-twitter, .fa-instagram, .fa-whatsapp, .fa-telegram {
+  font-size: 16px;
+  padding: 5px;
+  width: 30px;
+  display: inline-block;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa:hover, .fa:focus { opacity: 0.7 }
+.fa-facebook { background: #3B5998; color: white }
+.fa-twitter { background: #55ACEE; color: white }
+.fa-instagram { background: #125688; color: white }
+.fa-whatsapp { background: #1bdd25; color: white }
+.fa-telegram { background: #2b8ecf; color: white }
+.blogDiv { width: 100%; max-width: 1100px; margin: 0 auto; box-sizing: border-box }
+/*
+|----------------------------------------------------------------------------|
+    HEADER STYLES
+|----------------------------------------------------------------------------|
+*/
+ header {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 199;
+  top: 0;
+  width: 100%;
+  background-color: var(--siteColor);
+}
+.three-bars { display: inline-block; height: auto; border-radius: 3px }
+.three-bars-div {
+ width: 1.8rem;
+ height: 100%;
+ padding: 2px;
+ display: -webkit-flex;
+ display: -webkit-box;
+ display: flexbox;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ gap: 15%;
+}
+.bar1 {
+  width: 70%;
+  height: 1px;
+  background-color: white;
+  border-radius: 50px;
+}
+.initial-search-div {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 5px;
+  padding: 5px;
+  margin: 0 auto;
+}
+#searchBtn {
+  padding: 5px;
+  font-size: 1rem;
+  color: white;
+}
+.search-div {
+width: 80%;
+max-width: 20rem;
+margin: 0px auto;
+border: 2px solid rgb(156, 156, 156);
+border-radius: 8px;
+}
+.searchdiv { display: none; padding: 10px }
+.search-div div {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: flex;
+}
+.search-div input {
+width: 90%;
+border: none;
+color: ghostwhite;
+background-color: inherit;
+border-right: 2px solid rgb(156, 156, 156);
+border-top-left-radius: 6px;
+border-bottom-left-radius: 6px;
+font-size: 14px;
+padding: 5px;
+outline: none;
+font-weight: 500;
+-webkit-transition: 400ms;
+-moz-transition: 400ms;
+-o-transition: 400ms;
+transition: 400ms;
+}
+.search-div input:focus { background-color: white; color: rgb(51, 51, 51) }
+.search-div button {
+width: 3rem; 
+background-color: inherit;
+border-radius: 0px;
+border-top-right-radius: 6px;
+border-bottom-right-radius: 6px;
+color: ghostwhite;
+border: none;
+font-weight: 600;
+font-size: 100%;
+}
+.search-div button:hover, .search-div button:focus { background-color: rgb(59, 68, 100) }
+.dropbtn {
+ padding: 0px 10px;
+ color: white;
+ background-color: inherit;
+ -webkit-transition: 300ms;
+ -moz-transition: 300ms;
+ -o-transition: 300ms;
+ transition: 300ms;
+}
+.dropbutton {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 2rem;
+}
+.dropbutton div {
+  width: 90%;
+  margin: 3px 0px;
+  height: 2px;
+  background-color: white;
+}
+.dropbtn:hover, .dropbtn:focus {
+  background-color: rgb(59, 68, 100);
+}
+.fa-close { color: rgb(255, 255, 255) }
+.side-nav {
+  border: 1px solid grey;
+  background-color: var(--siteColor);
+  padding: 10px;
+  display: none;
+  max-height: 100vh;
+  width: 100%;
+  max-width: 400px;
+  position: absolute; 
+  left: 0; 
+  top: 0;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.side-nav::-webkit-scrollbar { display: none }
+.side-nav nav a {
+  display: block;
+  color: rgb(230 224 224);
+  max-width: 80%;
+  border: 2px none rgb(211, 190, 190);
+  border-bottom-style: groove;
+  padding: 10px 5px;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.side-nav nav a:hover, .side-nav nav a:focus { color: rgb(216 63 63) }
+.side-nav nav a:last-child { border-style: none }
+.top-demo-btn {
+ background-color: inherit;
+ border-radius: 5px;
+ border: 1px solid rgb(175, 0, 0);
+ padding: 10px;
+ font-weight: 600;
+ color: white;
+ font-family: sans-serif;
+ -webkit-transition: 300ms;
+ -moz-transition: 300ms;
+ -o-transition: 300ms;
+ transition: 300ms;
+}
+.top-demo-btn:hover, .top-demo-btn:focus { background-color: rgb(175, 0, 0) }
+#background-div-search {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(207, 207, 207, 0.575)
+}
+#background-div {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  z-index: 2; 
+  display: none;
+  background-color: rgba(34, 34, 34, 0.664); 
+  height: 100vh; 
+  width: 100%;
+}
+/*
+|----------------------------------------------------------------------------|
+    FOOTER STYLES
+|----------------------------------------------------------------------------|
+*/
+footer {
+  background-color: var(--siteColor);
+  border: 2px solid rgb(171, 196, 199);
+  border-style: solid none none none;
+  margin-top: 4rem;
+}
+.footer-flex { max-width: 1100px; margin: 0 auto }
+.reach-us {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 5px 5px;
+  margin-bottom: 10px;
+}
+footer nav { padding: 0px }
+footer nav ul { list-style-type: none; padding: 4px 0 }
+footer nav ul > div {
+  display: inline-block;
+  width: 46%;
+  margin: 0 1%;
+  vertical-align: top;
+}
+footer nav li { display: block; padding: 4px 0px }
+footer nav a {
+  margin: 4px;
+  color: rgb(235, 230, 230);
+  font-size: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+}
+footer nav a:hover, footer nav a:focus { color: rgb(216 63 63) }
+footer hr { margin: 10px 0px }
+.scrollToTop {
+  display: none;
+  position: fixed;
+  right: 5px;
+  bottom: 30px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #383896;
+  z-index: 1;
+  opacity: 0.3;
+  font-size: 130%;
+  color: white
+}
+.scrollToTop:hover, .scrollToTop:focus { opacity: 0.7 }
+.copyright {
+  color: rgb(226, 245, 219);
+  font-size: 11px;
+  text-align: center;
+  padding: 50px 0px 10px 0px;
+}
+.help {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  margin: 20px 0 10px 0;
+  padding-left: 4px;
+  font-weight: 600;
+  color: rgb(176, 221, 146);
+}
+@media (min-width: 400px) {
+  .search-div input { padding: 8px }
+  .initial-search-div { gap: 20px }
+}
+ @media (min-width: 700px) {
+   @keyframes fade {
+      0% { opacity: 1 }
+      50% { opacity: 0.6 }
+      100% { opacity: 1 }
+   }
+   @keyframes fade {
+      0% { opacity: 1 }
+      50% { opacity: 0.6 }
+      100% { opacity: 1 }
+   }
+   .fa-facebook, .fa-instagram, .fa-telegram, .fa-twitter, .fa-whatsapp { animation: fade 1s infinite }
+   .help, .copyright, footer nav a { font-size: 14px }
+}
+@media (min-width: 768px) {
+  header { position: static }
+  .top-demo-btn { margin: 15px }
+  .side-nav-parent { width: 100%; background-color: rgb(235, 235, 235) !important; }
+  .side-nav {
+     background-color: rgb(235, 235, 235) !important;
+     display: block;
+     padding: 0;
+     position: static;
+     border: none;
+     max-width: 100%;
+     margin: 0 auto;
+  }
+  .side-nav nav {
+     width: 38.5rem;
+     display: block;
+     white-space: nowrap;
+     overflow: hidden;
+  }
+  .side-nav nav a {
+     display: inline-block;
+     box-sizing: border-box;
+     color: rgb(78, 78, 78);
+     border: none;
+     border-bottom: 2px solid rgb(235, 235, 235);
+     padding: 14px 10px;
+  }
+  .side-nav nav a:focus, .side-nav nav a:hover { border-bottom-color:rgb(78, 78, 78); color: rgb(78, 78, 78) }
+  .side-nav div:first-child, .side-nav div:last-child,.side-nav .help, .hide-link { display: none !important }
+  .active { border-bottom-color:rgb(78, 78, 78) !important }
+  .dropbtn { display: none; }
+  .initial-search-div { padding: 0px }
+  #searchBtn { display: none }
+  .searchdiv {  text-align: right; display: block; padding: 10px; }
+  .search-div {  display:inline-block; margin-right: 10px }
+  .copyright { padding: 50px 0px 50px 0px }
+}
+@media (min-width: 780px) {
+  footer nav { margin-top: 1rem }
+  .grid > div { display: inline-block; width: 50%;
+  }
+  .fa-facebook, .fa-twitter, .fa-instagram, .fa-whatsapp, .fa-telegram { font-size: 25px; padding: 10px; width: 50px }
+}
+@media (min-width: 1300px) {
+  .side-nav { padding-left: 2.5% }
+}
+</style>
+<style>
+    #insert { background-color: #fafafa }
+ #flex { padding-left: 2.5%; margin-bottom: 3rem; width: 100% }
+ .category {
+    padding: 5px 20px 5px 5px;
+    margin: 8px 0;
+    color: #babd00;
+    font-size: small;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    display: inline-block;
+ }
+ .category a { color: #babd00 }
+ .category a:hover, .category a:focus { color: rgb(172, 41, 41); text-decoration: underline; }
+ h1, h2,h3,h4,h5,h6, #flex .date, .author { font-family: 'Poppins', 'Roboto', sans-serif }
+ h1 { font-size: 28px; padding-right: 10px; color: #1E2F3F }
+ h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2 }
+ h2 { font-size: 25px }
+ h3 { font-size: 21px }
+ h4 { font-size: 19px }
+ h5 { font-size: 16px }
+ h6 { font-size: 14px }
+ 
+ #flex .date {
+    font-size: 14px;
+    font-weight: 400;
+    color: #505050;
+    padding: 0.4rem 0;
+    margin-bottom: 3px;
+ }
+ .clock { font-size: 15px; margin-right: 3px }
+ .inline-link-div .date { color: dimgrey }
+ .author { font-size: 1rem; font-weight: 500; padding: 1% 0% }
+ .topImgDiv {
+    width: 100%;
+    margin-top: 3rem;
+    background: linear-gradient(205deg, lightcyan 0px, darkgrey 56px, #003E46 300px);
+    border: 5px solid #000000;
+ }
+ .topImgDiv img { width: 100% }
+ .topImgDiv img[alt] { color: white; font-size: small }
+ .topImgDiv div {
+    font-size: 70%;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 5px 5px;
+    color: rgb(142 171 170);
+ }
+ p, #insert ol li, #insert ul li {
+    clear: left;
+    padding: 3% 2%;
+    line-height: 150%;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    color: #3a516b;
+ }
+ p {  margin-bottom: 0px !important }
+ .post-body h1, h2, h3, h4, h5, h6 { padding: 1% 2% }
+ #insert ul { margin: 2% }
+ #insert ul li { line-height: 18px; padding: 10px }
+ .post-body { padding-top: 3rem; max-width: 700px; }
+ .post-body a { color: rgb(38, 38, 182) }
+ #insert a:hover, #insert a:focus { text-decoration: underline; text-underline-position: below; outline: none }
+ ol { padding: 10px 30px }
+#insert ul { list-style-type: disc; padding: 10px 30px }
+ .other-images { width: 100%; margin-top: 30px; margin-bottom: 20px; padding: 5px }
+ .other-images > div {
+  background-color: #171718;
+  width: 100%;
+  margin: 0 auto 15px auto;
+  text-align: center;
+  box-shadow: 0px 0px 20px -6px rgb(159, 199, 223);
+ }
+ .other-images img { width: 100% }
+  .other-images i {
+    display: block;
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgb(222, 232, 247);
+ }
+ hr { margin: 10px; } 
+ .read-also {
+    margin: 2rem 10px 2rem 2%;
+    padding: 2%;
+    border: 2px solid darkkhaki;
+    border-style: none none none solid;
+    box-shadow: 3px 5px 14px -5px rgb(203 211 220);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    background-color: white;
+ }
+ .read-also a { color: rgb(190 14 121); font-size: medium }
+ .read-also a:hover, .read-also:focus, .blogDiv > p a:hover, .blogDiv > p a:focus { color: crimson; text-decoration: underline }
+ .advertisement {
+    text-align: center;
+    font-size: small;
+    font-weight: 700;
+    color: #808080;
+    z-index: 1;
+ }
+ .advert {
+    width: 97%;
+    border: 1px solid #e7e7e6;
+    background-color: #fcfcfc;
+    margin: auto;
+    height: 120px;
+ }
+ #show-advert { margin-top: 2rem }
+ #show-advert > hr { margin: 20px }
+ #tags-div { padding: 5px; font-size: small; font-weight: 500 }
+ #tags-div a {
+    display: inline-block;
+    background-color: rgb(24, 112, 24);
+    color: white;
+    font-size: 70%;
+    font-weight: 500;
+    padding: 3px 6px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    border: 2px solid rgb(10, 97, 10);
+    cursor: pointer;
+    border-radius: 8px;
+    outline: none;
+ }
+ #tags-div a:nth-child(even) { background-color: #700799; border-color: #55006e}
+ #shareDiv h3 {
+    margin: 0;
+    margin-top: 3rem;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+ #shareDiv { margin-left: 2% }
+ #combine { border-top: 1px solid var(--borderColor); border-bottom: 1px solid var(--borderColor) }
+ .related-post {
+   font-size: 1.2rem;
+   font-weight: 600;
+   margin: 2rem 0 0 0;
+   font-family: 'Roboto', sans-serif;
+   padding: 0.5rem 0.4rem;
+   background-color: #14a006;
+   color: white;
+   border: 2px solid;
+   border-style: solid none solid none;
+   border-top-color: #eb7e1b;
+   border-bottom-color: #2d7a0e;
+ }
+ .related-post2 { border-top-color: #eb7e1b; border-bottom-color: #6e1c2a; background-color: #a50b29 }
+ .inline-link-div {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: flex;
+  margin: 0.7rem 0;
+  padding: 3px 0px;
+  border: 2px solid rgb(232, 233, 232);
+  border-style: solid none solid none;
+  box-shadow: 0px 0px 20px -6px rgb(149, 167, 175);
+  background-color: rgb(247, 251, 252);
+ }
+ .inline-link-img {
+    border-radius: 4px;
+    width: 6rem;
+    margin: 0px 5px;
+    border: 1px solid var(--borderColor);
+ }
+ .inline-link-div a {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 5px;
+    color: rgb(17, 17, 17);
+    font-weight: 600;
+    text-shadow: none;
+ }
+ .inline-link-div a:hover, .inline-link-div a:focus { color: crimson }
+ .inline-link-div .date { margin-top: 5px }
+ .align-bottom {
+   display: -webkit-flex;
+   display: -webkit-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   position: relative;
+ }
+ .inline-link-div a::after {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   content: '';
+   height: 100%;
+ }
+ .inline-link-div .date { font-size: 11px; color: #989038 }
+ #also-like {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   align-items: stretch;
+   margin-top: 10px;
+ }
+ .sponsored-span {
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: var(--bodyBackground);
+    padding: 5px;
+    grid-column: span 4;
+ }
+ .sponsored-span > img { width: 100% }
+ .sponsored-span a {
+   padding: 10px 0px;
+    display: block;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(17, 17, 17);
+ }
+ .sponsored-span a:hover, .sponsored-span a:focus { color: crimson }
+ .comm-newsl {
+   display: -webkit-flex;
+   display: -webkit-box;
+   display: flex;
+   align-items: flex-start;
+   flex-flow: row wrap;
+   margin: 40px 0px;
+}
+ #comment-section {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 40px;
+    background-color: #fcfbf8;
+    border: 1px solid rgb(232, 232, 236);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3f3f3f;
+ }
+.form-group { margin-bottom: 1rem }
+ .form-control {
+   display: block;
+   width: 100%;
+   height: calc(1.5em + 0.75rem + 2px);
+   padding: 0.375rem 0.75rem;
+   font-size: 1rem;
+   font-weight: 400;
+   line-height: 1.5;
+   color: #495057;
+   background-color: #fff;
+   background-clip: padding-box;
+   border: 1px solid #ced4da;
+   border-radius: 0.25rem;
+   -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   -moz-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+ }
+ @media (prefers-reduced-motion: reduce) {
+   .form-control { transition: none }
+ }
+ .form-control::-ms-expand { background-color: transparent; border: 0 }
+ .form-control:-moz-focusring { color: transparent; text-shadow: 0 0 0 #495057 }
+ .form-control:focus {
+   color: #495057;
+   background-color: #fff;
+   border-color: #80bdff;
+   outline: 0;
+   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+ }
+ .form-control::-webkit-input-placeholder { color: #6c757d; opacity: 1 }
+ .form-control::-moz-placeholder {
+   color: #6c757d;
+   opacity: 1;
+ }
+ .form-control:-ms-input-placeholder { color: #6c757d; opacity: 1 }
+ 
+ .form-control::-ms-input-placeholder { color: #6c757d; opacity: 1 }
+ 
+ .form-control::placeholder { color: #6c757d; opacity: 1 }
+ 
+.form-check-inline {
+   display: -ms-inline-flexbox;
+   display: inline-flex;
+   -ms-flex-align: center;
+   align-items: center;
+   padding-left: 0;
+   margin-right: 0.75rem;
+ }
+ 
+ .form-check-inline .form-check-input {
+   position: static;
+   margin-top: 0;
+   margin-right: 0.3125rem;
+   margin-left: 0;
+ }
+ 
+ .form-control:disabled, .form-control[readonly] { background-color: #e9ecef; opacity: 1 }
+ #comment-section textarea {
+   width: 80%;
+   padding: 1.5%;
+   height: 7rem;
+   border: 1px solid;
+   border-color: rgb(205, 205, 209);
+   outline-color: rgb(214, 214, 216);
+ }
+ #comment-section div:first-of-type {
+    font-family: "Merriweather", Arial, Helvetica, sans-serif;
+    font-size: 110%;
+    margin: 5px 0;
+ }
+ #comment-section input[type='text'], #comment-section input[type='email'] {
+    padding: 1.5%;
+    min-height: 1.5rem;
+    margin: 8px 0;
+    width: 80%;
+    border: 1px solid rgb(205, 205, 209);
+    font-size: 80%;
+    font-weight: 500;
+    color: rgb(55, 70, 99);
+ }
+ #comment-section input[type='text']:focus, #comment-section input[type='email']:focus {
+    background-color: rgb(247, 252, 213);
+    border-color: rgb(214, 214, 216);
+    outline-color: rgb(214, 214, 216);
+    color: rgb(56, 13, 33);
+ }
+ #comment-section form label:last-of-type { color: brown; font-size: 12px }
+ #comment-section label:not(:last-child) { position: absolute; left: -3000px }
+ #submit-comment {
+    background-color: rgb(41, 58, 90);
+    padding: 0.6rem 0.2rem;
+    width: 50%;
+    margin-top: 5px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(12, 8, 63);
+    border-radius: 4px;
+    cursor: pointer;
+ }
+ .newsletter {
+   width: 95%;
+   margin: 80px auto;
+   border: 2px solid rgb(62, 32, 66); 
+   border-radius: 4px; 
+   background-color: rgb(73, 32, 91); 
+   box-shadow: 0px 0px 30px -1px rgb(149, 167, 175);
+   color: white; 
+   text-align: center; 
+   padding: 10px;
+ }
+.newsletter > div { padding: 1rem 0; }
+ .newsletter p { font-size: 70%; font-weight: 600; color: rgb(196, 224, 93) }
+ .id-div {
+   background-color: rgb(247, 247, 247);
+   max-width: 25rem;
+   width: 80%;
+   padding-left: 4px;
+   display: -webkit-flex;
+   display: -webkit-box;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border: 2px solid rgb(34, 4, 58);
+   border-radius: 9px;
+   color: rgb(100, 100, 100);
+   margin: 0 auto;
+   font-size: 18px;
+}
+.id-div div:first-child { width: 2.7rem; text-align: center }
+
+.newsletter input {
+   width: 100%;
+   border: none;
+   padding: 4px;
+   font-size: 13px;
+   outline: none;
+   background-color: inherit;
+}
+.input {
+   width: 90%;
+   padding: 4px;
+   background-color: white;
+   border: 1px solid rgb(40, 16, 85);
+   border-style: none none none solid;
+   border-radius: 0px 9px 9px 0px;
+   outline: none;
+}
+.input:hover, .input:focus, .input:active { background-color: rgb(243, 238, 168) }
+.newsletter button {
+   width: 50%;
+   max-width: 10rem;
+   padding: 10px;
+   cursor: pointer;
+   outline: none;
+   border: 3px solid white;
+   border-radius: 6px;
+   background-color: rgb(4, 65, 49);
+   color: white;
+}
+.newsletter button:hover, .newsletter button:focus { background-color: rgb(15, 126, 98) }
+.newsletter button:active { background-color: rgb(1, 39, 29) }
+
+@media (min-width: 400px) {
+  .topImgDiv div { font-size: 85%; line-height: 150% }
+  h1 { font-size: 30px }
+  h2 { font-size: 28px }
+  h3 { font-size: 25px }
+  h4 { font-size: 21px }
+  h5 { font-size: 19px }
+  h6 { font-size: 16px }
+  #flex .date { font-size: 15px; padding: 1rem 0 }
+  .clock { font-size: 17px; margin-right: 5px }
+  .author { font-size: 1.2rem; padding: 1% 0% }
+  .inline-link-img { width: 9rem }
+}
+
+@media (min-width: 500px) {
+    .smaller-links img { width: 11rem }
+    .inline-link-div { padding: 8px 3px }
+    .inline-link-div .date { font-size: 12px }
+    .inline-link-div a { font-size: 1rem }
+    .sponsored-span {
+        grid-column: span 2;
+        border: 2px solid rgb(233, 236, 211);
+        border-radius: 10px;
+        background-color: white;
+        filter: drop-shadow(-2px 4px 5px rgb(138, 165, 163));
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
+
+@media (min-width: 620px) {
+    .lis i { width: 33.33% }
+    #comment-section input[type='text'], #comment-section input[type='email'] { font-size: 90% }
+    #comment-section form label:last-of-type { font-size: 13px }
+}
+@media (min-width: 700px) {
+   .latest { font-size: 22px }
+   .other-images > div {
+      display: inline-block;
+      margin-left: 3%;
+      margin-right: 3%;
+      width: 44%;
+   }
+   .read-also { font-size: large }
+   .read-also a { font-size: large; font-weight: 500 }
+   .inline-link-img { width: 10rem }
+}
+@media (min-width: 780px) {
+    .category { font-size: medium }
+    h1 { font-size: 34px }
+    h2 { font-size: 30px }
+    h3 { font-size: 28px }
+    h4 { font-size: 24px }
+    h5 { font-size: 21px }
+    h6 { font-size: 19px }
+    #flex .date { font-size: 18px; padding: 1.4rem 0; margin-bottom: 6px }
+    .clock { font-size: 19px }
+    .author { font-size: 1.2rem; padding: 1% 0% }
+    .advertisement { font-size: medium }
+    .advert { height: 30vw }
+    p, ol li, #insert ul li { font-size: 20px }
+    .read-also a, .read-also { font-size: 22px }
+    .smaller-links img { margin-right: 12px }
+    #comment-section form label:last-of-type { margin: 10px 0; font-size: 12px }
+    #submit-comment { padding: 0.8rem 0.2rem }
+    .smaller-links a, #latest-news a { font-size: 20px }
+    .inline-link-div { padding: 10px 5px }
+    .inline-link-div a { font-size: 1.2rem }
+}
+@media (min-width: 850px) {
+   #combine {
+      border: 1px solid #efefef;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      background-color: var(--bodyBackground);
+   }
+  .sponsored-span { grid-column: span 4; margin-left: 7.5%; margin-right: 7.5% }
+  .inline-link-div a { font-size: 1rem }
+}
+@media (min-width: 1000px) {
+  .smaller-links > div { margin: 10px 0 }
+  #latest-news > a { font-size: 120% }
+}
+@media (min-width: 1200px) {
+  .sponsored-span {
+    grid-column: span 2;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  .post-body { max-width: 1000px }
+}
+@media (min-width: 1050px) {
+  .top-flex {
+   display: -webkit-flex;
+   display: -webkit-box;
+    display: flex;
+    align-items: flex-start;
+  }
+  #flex { max-width: 48% }
+  #insert { padding-top: 2rem }
+  .topImgDiv { width: 50%; max-width: 40rem }
+}
+@media (min-width: 1550px) {
+  .category, #flex .date, .topImgDiv div, .read-also,
+  .read-also a, .advertisement { font-size: 1.2vw }
+  h1 { font-size: 2.5vw }
+ .date { padding: 1.2vw 0; margin-bottom: 3px }
+ .other-images > div { max-width: 40vw }
+ #shareDiv h3 { font-size: 1.3vw }
+ .related-post { font-size: 1.6vw; margin: 2rem auto }
+ .inline-link-div a, .sponsored-span { font-size: 1vw }
+ .inline-link-img { width: 8vw }
+}
+</style>
+<body>
+  <header id="toTop" style="background-color: rgb(16, 16, 54)">
+      <div class="initial-search-div">
+          <button id="searchBtn" title="Open or Close Search Field">
+              <i class="fa fa-search" style="display: block;" onclick="handleSearchBtnClick()" title="Search"></i>
+              <i class="fa fa-close" style="display: none;" onclick={handleSearchBtn2Click()} title="Close search"></i>
+          </button>
+          <button class="top-demo-btn" aria-label='Login to your account' title='Login to your account'><i class="fa fa-user"></i>&nbsp; Login</button>
+          <button class="dropbtn" id="dropbtn" onclick="handleDropBtnClick()">
+              <div class="dropbutton"><div></div> <div></div> <div></div> </div>
+          </button>
+      </div>
+      <div class="searchdiv">
+          <div class="search-div">
+              <form action="" name="search-form">
+                  <div>
+                      <label for='search' style="position: absolute; left: -3000px">Search website</label>
+                      <input type="search" name="search" id='search' placeholder="Search..." />
+                      <button type="submit">
+                          <i className="fa fa-search"></i>
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="side-nav-parent">
+          <div class="side-nav">
+              <div style="text-align: right">
+                  <button type="button" title="Close Side Navigation">
+                      <i class="fa fa-close" style="font-size: 1.5rem" onclick="handleCloseSidenav"></i></button>
+              </div>
+              <nav>
+                  <a class="active">Home</a>
+                  <a>Teams</a>
+                  <a>Fixtures</a>
+                  <a>Results</a>
+                  <a>Livescores</a>
+                  <a>Table</a>
+                  <a>Leagues</a>
+                  <a>Transfers</a>
+                  <div class="help" style="margin-bottom: 5px; color: rgb(216, 105, 15)">Help and Support</div>
+                  <a class="hide-link">About Us</a>
+                  <a class="hide-link">Advertise with us</a>
+                  <a class="hide-link">Contact Us</a>
+                  <a class="hide-link">Privacy Policy</a>
+                  <a class="hide-link">Terms and Conditions</a>
+              </nav>
+              <div style="margin-bottom: 2rem">
+                  <div class="help" style="color: white; font-size: 11px">
+                      You can reach us through the following links:
+                  </div>
+                  <a><i class="fa fa-facebook"></i></a>
+                  <a><i class="fa fa-whatsapp"></i></a>
+                  <a><i class="fa fa-twitter"></i></a>
+                  <a><i class="fa fa-instagram"></i></a>
+                  <a><i class="fa fa-telegram"></i></a>
+              </div>
+          </div>
+      </div>
+  </header>
+  <div id="background-div" onclick="handleBackgroundDivClick()"></div>
+  <div id="background-div-search" onclick="handleBackgroundDivS()"></div>
+  <div id="insert">
+      <section class="top-flex">
+          <div id="flex">
+            <div id="category" class="category">
+              <a href="">Home</a> » <a href="" id="categoryTop"></a> » <span id="topicTop"></span>
+            </div>
+            <h1 id="topic"></h1>
+            <div class="date">
+              <div>
+                <span class="clock">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <span id="datePostedd"></span>
+              </div>
+    
+              <div class="author">
+                Author: <span id="author"></span>
+              </div>
+            </div>
+            <div class="shareDiv">
+              <a href="">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-whatsapp"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-telegram"></i>
+              </a>
+            </div>
+          </div>
+            <div class="topImgDiv" style="height: 12rem">
+              <img onload="handleTopImgDiv()" class="topImage" id="topImage">
+              
+            </div>
+        </section>
+        <div class="post-body"></div>
+        <div id="show-advert">
+          <div class="advertisement">Advertisement</div>
+          <div class="advert" id="advert"></div>
+          <hr />
+        </div>
+  </div>
+  Topic: Chelsea takeover: Preferred bid to be presented to government, Premier League on April 18
+  Url: Chelsea-takeover-Preferred-bid-to-be-presented-to-government-Premier-League-on-April-18.html     g
+  Topic: Marcelo Biesla: Leeds manager denies reports he is close to signing new two-year deal 36 minutes ago
+  Url: Marcelo-Biesla:-Leeds-manager-denies-reports-he-is-close-to-signing-new-two-year-deal-36-minutes-ago     g
+  Topic: Ref Watch: Was McTominay lucky to escape red card?
+  Url: Ref-Watch:-Was-McTominay-lucky-to-escape-red-card?   g
+  Topic: Transfer rumours: Ronaldo, Sterling, Martinez, Depay, Broja, Sinisterra
+  Url: Transfer-rumours:-Ronaldo,-Sterling,-Martinez,-Depay,-Broja,-Sinisterra   g
+  Topic: Web Developer Resume for 2022 - Guide & Examples
+  Url: Web-Developer-Resume-for-2022:-Guide-&-Examples
+  Topic: Pep 'disappointed' with absent players | Neymar links are 'false'         
+  Url: Pep-'disappointed'-with absent-players-|-Neymar-links-are-'false'            g
+
+
+
+
+  <footer>
+    <div class="footer-flex">
+        <div class="reach-us">
+            <div class="help" style="color: white">You can reach us through the following links:</div>
+            <a><i class="fa fa-facebook"></i></a>
+            <a><i class="fa fa-whatsapp"></i></a>
+            <a><i class="fa fa-twitter"></i></a>
+            <a><i class="fa fa-instagram"></i></a>
+            <a><i class="fa fa-telegram"></i></a>
+        </div>
+        <hr />
+        <nav>
+            <ul>
+                <div class="grid">
+                    <div>
+                        <li><a>Home</a></li>
+                        <li><a>News</a></li>
+                        <li><a>Fixtures</a></li>
+                    </div>
+                    <div>
+                        <li><a>Livescores</a></li>
+                        <li><a>Table</a></li>
+                        <li><a>Leagues</a></li>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div>
+                        <li><a>Contact Us</a></li>
+                        <li><a>About Us</a></li>
+                        <li><a>Advertise with us</a></li>
+                    </div>
+                    <div>
+                        <li><a>Privacy Policy</a></li>
+                        <li><a>Terms and Conditions</a></li>
+                        <li><a>Write for sportsreal</a></li>
+                    </div>
+                </div>
+            </ul>
+            <div class="copyright"><i class="fa fa-copyright"></i> Sportsreal 2022. All rights reserved.</div>
+        </nav>
+    </div>
+    <div className="scrollToTop" onclick="handleClick()"><i class="fa fa-arrow-up"></div>
+</footer>
+</body>
+<script>
+    let monthName = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+let weekNames = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+    let state = __STATE__;
+    let dayOfWeek = weekNames[new Date(state?.dateCreated).getDay()];
+    let month = monthName[new Date(state?.dateCreated).getMonth()];
+    let todaysDate = new Date(state?.dateCreated).getDate();
+    let year = new Date(state?.dateCreated).getFullYear();
+    let datePosted = `${dayOfWeek}, ${todaysDate} ${month} ${year}`;
+    function handleTopImgDiv() {
+        document.getElementsByClassName('topImgDiv')[0].style.height = "auto";
+    }
+    function handleClick() {
+        document.body.scrollIntoView(true);
+    }
+    let elId = (id) => document.getElementById(id);
+    let categoryTop = elId('categoryTop');
+    categoryTop.innerHTML = state.category;
+    let topicTop = elId('topicTop'); topicTop.innerHTML = state.topic;
+    let topic = elId('topic'); topic.innerHTML = state.topic;
+    let datePostedd = elId('datePostedd'); datePostedd.innerHTML = datePosted;
+    let author = elId('author'); author.innerHTML = state.author.name;
+    let topImage = elId('topImage');
+    topImage.src = state.mainImage;
+    let postBody = document.getElementsByClassName('post-body')[0];
+    let paragraphs = state.newsBody.split(/\n/g);
+    let ids = 0;
+    for(let p of paragraphs) {
+      if(p.length < 3) continue;
+      // if(p.match(/^<a/) || p.match(/^<b/)) {
+      //     postBody.innerHTML += `<p id="paragraph-${ids++}">${p}</p>`;
+      // }else {
+          postBody.innerHTML += `<p id="paragraph-${ids++}">${p}</p>`;
+      // }
+    }
+    function createEl(element, prop={}) {
+        let el = document.createElement(element);
+        for(let key of Object.keys(prop)) {
+            if(key == "class" || key == "name") {
+                (Array.isArray(prop[key]))? el.setAttribute(key, prop[key].join(' ')): el.setAttribute(key, prop[key]);
+            }else {
+                el[key] = prop[key];
+            }
+        }
+        return el;
+    }
+   // data C:\Program Files\MongoDB\Server\5.0\data\
+  // log C:\Program Files\MongoDB\Server\5.0\log\
+    function generateImages() {
+        let i=0;
+        while(i<Object.keys(this).length) {
+            let section = document.createElement('section');
+            let div1 = createEl('div', {class: ['other-images']});
+            for(let key of Object.keys(this[i])) {
+                if(key == 'insertAt') break;
+                let imageCred = this[i][key].credit;
+                let imageSrc = this[i][key].src;
+                let alt = this[i][key].alt;
+                let div2 = createEl('div', {innerHTML: `<img src="${imageSrc}" alt="${alt}">`});
+                let iTag = createEl('i', {innerHTML: imageCred});
+                if(!imageCred.trim() == '' || imageCred.trim().length > 15) div2.appendChild(iTag);
+                div1.appendChild(div2);
+            }
+            section.appendChild(div1);
+            document.getElementById(this[i].insertAt).insertAdjacentElement("afterend", section);
+            i++;
+        }
+    }
+    generateImages.call(state.otherImages);
+    let root = document.getElementById('paragraph-4') || document.getElementById('paragraph-3');
+    root.insertAdjacentHTML("afterend", `<div class="read-also" id="read-also">
+    <b>READ ALSO: </b>
+    <a href="#">${state.readalso.innerText}</a>
+    </div>`);
+</script>
+</html>

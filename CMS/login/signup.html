@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportsreal CMS</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @font-face {
+    font-family: "Roboto-Light";
+    src: url(Roboto-Medium.ttf);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    letter-spacing: .03rem;
+    text-shadow: none;
+}
+.center, header, .login {
+    text-align: center;
+}
+.fa-upload { margin-right: 5px }
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+a {
+    color: #0000ff;
+    outline: none;
+    padding: 2px;
+    cursor: pointer;
+    -webkit-transition: background-color 600ms;
+    -moz-transition: background-color 600ms;
+    -o-transition: background-color 600ms;
+    transition: background-color 600ms;
+}
+a:hover, a:focus {
+    background-color: transparent;
+    color: crimson;
+}
+.white { color: rgb(97, 97, 97) }
+button {
+    border-radius: 0px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-transition: background-color 600ms;
+    -moz-transition: background-color 600ms;
+    -o-transition: background-color 600ms;
+    transition: background-color 600ms;
+}
+.login, .id-div, .center button, .enter-news button, .textarea, .help-descr, .edit-text button, .ol ul li {
+    font-weight: 500;
+}
+header {
+    width: 100%;
+    font-size: 8vw;
+    font-family: cursive;
+    background-color: rgb(0, 0, 0);
+    background:-moz-linear-gradient();
+    color: white;
+    padding: 2vh 0;
+}
+.form-body {
+    background: #0000bb repeating-radial-gradient(circle closest-side at center center, #0d0d4d -50%, #010142 120vw);
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.login {
+    font-size: 18px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
+    padding: 15px 0;
+}
+form {
+    width: 90%;
+    max-width: 30rem;
+    margin: 0rem auto;
+    padding: 1rem 0rem 2rem;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}
+.info-div {
+    padding-top: 5px;
+}
+.info {
+    display: flex;
+    color: #979109;
+    font-size: 0.7rem;
+    line-height: 150%;
+}
+.info i {
+    padding-right: 3px;
+    margin-top: 3px
+}
+.hide { display: none }
+select {
+    width: 100%;
+    padding: 0.7rem;
+    color: rgb(0, 0, 0);
+    background-color: #ededed;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+.option {
+    background-color: white;
+    color: rgb(65, 45, 78);
+    font-weight: 500;
+}
+.id-div {
+    width: 85%;
+    color: rgb(5 39 67);
+    font-size: 14px;
+    text-align: left;
+    margin: 0rem auto;
+}
+.id-div label {
+    display: block;
+    padding: 20px 0px 5px;
+    font-size: 0.8rem;
+}
+.sexDiv div {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.sexDiv label {
+    display: inline-block;
+    padding: 0px;
+    padding-left: 5px;
+}
+.date-grid {
+    display: grid;
+    grid-template-columns: 4rem auto 30%;
+}
+.date-grid div {
+    width: 100%;
+}
+.date-grid label {
+    padding: 10px 0px 5px;
+}
+.id-div h4 {
+    padding-top: 20px;
+}
+.date-input {
+    width: 100%;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    background-color: #e1e1e1 !important;
+}
+.sexDiv {
+    padding: 10px 0px;
+}
+.center input:not([type="radio"]) {
+    border: none;
+    padding: 0.7rem;
+    font-size: 13px;
+    flex-grow: 1;
+    outline: none;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0);
+}
+.input {
+    background-color: #e1e1e1;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.input:hover, .input:focus, .input:active {
+    background-color: rgb(243, 238, 168);
+}
+.input i {
+    padding: 0px 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+input[type="password"]::-ms-clear, input[type="password"]::-ms-reveal {
+    display: none;
+}
+.padR {
+    padding-right: 0px !important;
+    background-color: #188038 !important;
+    border-radius: 5px 0px 0px 5px;
+    color: white;
+}
+.padL {
+    padding-left: 10px !important;
+    background-color: #e1e1e1 !important;
+    border-radius: 0px 5px 5px 0px;
+    color: rgb(0, 0, 0);
+}
+.center p, .signup-agr {
+    font-size: 0.7rem;
+    margin: 0;
+    color: rgb(5 39 67);
+    line-height: 150%;
+    letter-spacing: 0.02rem;
+}
+.signup-agr {
+    padding: 10px 0px;
+}
+.center button {
+    width: 50%;
+    max-width: 10rem;
+    padding: 12px;
+    margin-bottom: 1rem;
+    margin-top: 0.8rem;
+    cursor: pointer;
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid #01013a;
+    border-radius: 6px;
+    background-color: #01013a;
+    color: white;
+}
+.center button:hover, .center button:focus {
+    background-color: #ffffff;
+    color: rgb(5 39 67);
+}
+.center button:active {
+    background-color: rgb(1, 39, 29);
+}
+.orAlt {
+    border: 1px solid gainsboro;
+    border-style: none none solid none;
+    position: relative;
+    margin: 0px 30px 40px;
+}
+.orAlt span {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8f8f8;
+    width: 4rem;
+    font-family: cursive;
+}
+.signup-alt {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 0px;
+}
+.signup-alt a {
+    display: flex;
+    border: 2px solid #01013a;
+    padding: 4px 0px;
+    border-radius: 50px;
+    margin: 10px 0px;
+    font-size: 14px;
+    text-decoration: none;
+}
+.a1 {
+    background-color: #01013a;
+    color: white;
+}
+.a2 {
+    color: #01013a;
+}
+.a1:hover, .a1:focus {
+    background-color: #ffffff;
+    color: #01013a;
+}
+.a2:hover, .a2:focus {
+    background-color: #01013a;
+    color: #ffffff;
+}
+.signup-alt a div {
+    align-items: center;
+}
+.signup-alt a div:last-child {
+    width: 80%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.signup-alt svg {
+    width: 1.5rem;
+    margin-left: 6%;
+}
+@media (min-width: 500px) {
+    .center {
+        padding-top: 2rem;
+    }
+}
+@media (min-width: 750px) {
+    header {
+        font-size: 60px;
+    }
+    form {
+        box-shadow: 0px 0px 0px 4px #060b44;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        Sign up
+    </header>
+    <section class="form-body">
+        <div class="center">
+            <form action="http://localhost:3001/signupjs" method="post" name="form" role="form" autocomplete="on">
+                <div class="id-div">
+                    <label for="fullname">Full name:</label>
+                    <div class="input">
+                        <input type="text" autocomplete="name" id="fullname" name="fullname" minlength="5" maxlength="25" placeholder="Enter full name..." required>
+                    </div>
+                    <label for="username">Username:</label>
+                    <div class="input">
+                        <input type="text" id="username" name="username" minlength="3" maxlength="25" placeholder="Enter username..." required>
+                    </div>
+                    <div class="info-div hide" id="un-info">
+                        <small class="info"><i class="fa fa-warning"></i>Username is too short</small>
+                    </div>
+                    <label for="email">Email address:</label>
+                    <div class="input">
+                        <input type="email" id="email" name="email" minlength="5" pattern=".+@.+\.\w+" placeholder="Enter email address..." required>
+                    </div>
+                    <div class="info-div hide" id="em-info">
+                        <small class="info"><i class="fa fa-warning"></i>Invalid email address</small>
+                    </div>
+                    <label for="emailM">Confirm Email:</label>
+                    <div class="input">
+                        <input type="text" name="confirmEmail" id="emailM" placeholder="Confirm email address..." required>
+                    </div>
+                    <div class="info-div hide" id="em-match">
+                        <small class="info"><i class="fa fa-warning"></i>Email address does not match</small>
+                    </div>
+                    <label for="phone">Phone number:</label>
+                    <div class="input" style="background-color: inherit;">
+                        <div>
+                            <input list="code" style="width: 4rem" name="phonecode" value="+234" class="padR" id="countryCode" pattern="-?\+?\d+" name="phoneCode" autocomplete="off" required>
+                            <datalist id="code">
+                                <option value="Åland Islands" data-code="+358"></option>
+                                <option value="Albania" data-code="+355"></option>
+                                <option value="Algeria" data-code="+213"></option>
+                                <option value="American Samoa" data-code="+1"></option>
+                                <option value="Andorra" data-code="+376"></option>
+                                <option value="Angola" data-code="+244"></option>
+                                <option value="Anguilla" data-code="+1"></option>
+                                <option value="Antigua &amp; Barbuda" data-code="+1"></option>
+                                <option value="Antarctica" data-code="+672"></option>
+                                <option value="Argentina" data-code="+54"></option>
+                                <option value="Armenia" data-code="+374"></option>
+                                <option value="Aruba" data-code="+297"></option>
+                                <option value="Australia" data-code="+672"></option>
+                                <option value="Austria" data-code="+43"></option>
+                                <option value="Azerbaijan" data-code="+994"></option>
+                                <option value="Bahamas" data-code="+1"></option>
+                                <option value="Bahrain" data-code="+973"></option>
+                                <option value="Bangladesh" data-code="+880"></option>
+                                <option value="Barbados" data-code="+1"></option>
+                                <option value="Belarus" data-code="+375"></option>
+                                <option value="Belgium" data-code="+32"></option>
+                                <option value="Belize" data-code="+501"></option>
+                                <option value="Benin" data-code="+229"></option>
+                                <option value="Bermuda" data-code="+1"></option>
+                                <option value="Bhutan" data-code="+975"></option>
+                                <option value="Bolivia" data-code="+591"></option>
+                                <option value="Bonaire" data-code="+599"></option>
+                                <option value="Bosnia &amp; Herzegovina" data-code="+387"></option>
+                                <option value="Botswana" data-code="+267"></option>
+                                <option value="Brazil" data-code="+55"></option>
+                                <option value="British Indian Ocean Territory" data-code="+246"></option>
+                                <option value="British Virgin Islands" data-code="+1"></option>
+                                <option value="Brunei" data-code="+673"></option>
+                                <option value="Bulgaria" data-code="+359"></option>
+                                <option value="Burkina Faso" data-code="+226"></option>
+                                <option value="Burundi" data-code="+257"></option>
+                                <option value="Cambodia" data-code="+855"></option>
+                                <option value="Cameroon" data-code="+237"></option>
+                                <option value="Canada" data-code="+1"></option>
+                                <option value="Cape Verde" data-code="+238"></option>
+                                <option value="Cayman Islands" data-code="+1"></option>
+                                <option value="Central African Republic" data-code="+236"></option>
+                                <option value="Chad" data-code="+235"></option>
+                                <option value="Chile" data-code="+56"></option>
+                                <option value="China" data-code="+86"></option>
+                                <option value="Christmas Island" data-code="+61"></option>
+                                <option value="Cocos (Keeling) Islands" data-code="+61"></option>
+                                <option value="Colombia" data-code="+57"></option>
+                                <option value="Comoros" data-code="+269"></option>
+                                <option value="Congo" data-code="+242"></option>
+                                <option value="Congo (DRC)" data-code="+243"></option>
+                                <option value="Cook Islands" data-code="+682"></option>
+                                <option value="Costa Rica" data-code="+506"></option>
+                                <option value="Côte d’Ivoire" data-code="+255"></option>
+                                <option value="Croatia" data-code="+385"></option>
+                                <option value="Cuba" data-code="+53"></option>
+                                <option value="Curaçao" data-code="+599"></option>
+                                <option value="Cyprus" data-code="+357"></option>
+                                <option value="Czech" data-code="+420"></option>
+                                <option value="Denmark" data-code="+45"></option>
+                                <option value="Djibouti" data-code="+253"></option>
+                                <option value="Dominica" data-code="+1"></option>
+                                <option value="Dominican Republic" data-code="+1"></option>
+                                <option value="Ecuador" data-code="+593"></option>
+                                <option value="Egypt" data-code="+20"></option>
+                                <option value="El Salvador" data-code="+503"></option>
+                                <option value="Equatorial Guinea" data-code="+240"></option>
+                                <option value="Eritrea" data-code="+291"></option>
+                                <option value="Estonia" data-code="+372"></option>
+                                <option value="Ethiopia" data-code="+251"></option>
+                                <option value="Falkland Islands" data-code="+500"></option>
+                                <option value="Faroe Islands" data-code="+298"></option>
+                                <option value="Fiji" data-code="+679"></option>
+                                <option value="Finland" data-code="+358"></option>
+                                <option value="France" data-code="+33"></option>
+                                <option value="French Guiana" data-code="+594"></option>
+                                <option value="French Polynesia" data-code="+689"></option>
+                                <option value="Gabon" data-code="+241"></option>
+                                <option value="Gambia" data-code="+220"></option>
+                                <option value="Georgia" data-code="+995"></option>
+                                <option value="Germany" data-code="+49"></option>
+                                <option value="Ghana" data-code="+233"></option>
+                                <option value="Gibraltar" data-code="+350"></option>
+                                <option value="Greece" data-code="+30"></option>
+                                <option value="Greenland" data-code="+299"></option>
+                                <option value="Grenada" data-code="+1"></option>
+                                <option value="Guadeloupe" data-code="+590"></option>
+                                <option value="Guam" data-code="+1"></option>
+                                <option value="Guatemala" data-code="+502"></option>
+                                <option value="Guinea" data-code="+224"></option>
+                                <option value="Guinea-Bissau" data-code="+245"></option>
+                                <option value="Guyana" data-code="+592"></option>
+                                <option value="Haiti" data-code="+509"></option>
+                                <option value="Heard &amp; McDonald Islands" data-code=""></option>
+                                <option value="Honduras" data-code="+504"></option>
+                                <option value="Hong Kong" data-code="+852"></option>
+                                <option value="Hungary" data-code="+36"></option>
+                                <option value="Iceland" data-code="+354"></option>
+                                <option value="India" data-code="+91"></option>
+                                <option value="Indonesia" data-code="+62"></option>
+                                <option value="Iran" data-code="+98"></option>
+                                <option value="Iraq" data-code="+964"></option>
+                                <option value="Ireland" data-code="+353"></option>
+                                <option value="Isle of Man" data-code="+44"></option>
+                                <option value="Israel" data-code="+972"></option>
+                                <option value="Italy" data-code="+39"></option>
+                                <option value="Jamaica" data-code="+1"></option>
+                                <option value="Japan" data-code="+81"></option>
+                                <option value="Jersey" data-code="+44"></option>
+                                <option value="Jordan" data-code="+962"></option>
+                                <option value="Kazakhstan" data-code="+7"></option>
+                                <option value="Kenya" data-code="+254"></option>
+                                <option value="Kiribati" data-code="+686"></option>
+                                <option value="Korea North" data-code="+850"></option>
+                                <option value="Korea South" data-code="+82"></option>
+                                <option value="Kosovo" data-code="+383"></option>
+                                <option value="Kuwait" data-code="+965"></option>
+                                <option value="Kyrgyzstan" data-code="+996"></option>
+                                <option value="Laos" data-code="+856"></option>
+                                <option value="Latvia" data-code="+371"></option>
+                                <option value="Lebanon" data-code="+961"></option>
+                                <option value="Lesotho" data-code="+266"></option>
+                                <option value="Liberia" data-code="+231"></option>
+                                <option value="Libya" data-code="+218"></option>
+                                <option value="Liechtenstein" data-code="+423"></option>
+                                <option value="Lithuania" data-code="+370"></option>
+                                <option value="Luxembourg" data-code="+352"></option>
+                                <option value="Macao SAR" data-code="+853"></option>
+                                <option value="Macedonia" data-code="+389"></option>
+                                <option value="Madagascar" data-code="+261"></option>
+                                <option value="Malawi" data-code="+265"></option>
+                                <option value="Malaysia" data-code="+60"></option>
+                                <option value="Maldives" data-code="+960"></option>
+                                <option value="Mali" data-code="+223"></option>
+                                <option value="Malta" data-code="+356"></option>
+                                <option value="Marshall Islands" data-code="+692"></option>
+                                <option value="Martinique" data-code="+596"></option>
+                                <option value="Mauritania" data-code="+222"></option>
+                                <option value="Mauritius" data-code="+230"></option>
+                                <option value="Mayotte" data-code="+262"></option>
+                                <option value="Mexico" data-code="+52"></option>
+                                <option value="Micronesia" data-code="+691"></option>
+                                <option value="Moldova" data-code="+373"></option>
+                                <option value="Monaco" data-code="+377"></option>
+                                <option value="Mongolia" data-code="+976"></option>
+                                <option value="Montenegro" data-code="+382"></option>
+                                <option value="Montserrat" data-code="+1"></option>
+                                <option value="Morocco" data-code="+212"></option>
+                                <option value="Mozambique" data-code="+258"></option>
+                                <option value="Myanmar" data-code="+95"></option>
+                                <option value="Namibia" data-code="+264"></option>
+                                <option value="Nauru" data-code="+674"></option>
+                                <option value="Nepal" data-code="+977"></option>
+                                <option value="Netherlands" data-code="+31"></option>
+                                <option value="Nevis" data-code="+1"></option>
+                                <option value="New Caledonia" data-code="+687"></option>
+                                <option value="New Zealand" data-code="+64"></option>
+                                <option value="Nicaragua" data-code="+505"></option>
+                                <option value="Niger" data-code="+227"></option>
+                                <option value="Nigeria" data-code="+234"></option>
+                                <option value="Niue" data-code="+683"></option>
+                                <option value="Norfolk Island" data-code="+672"></option>
+                                <option value="Northern Mariana Islands" data-code="+1"></option>
+                                <option value="Norway" data-code="+47"></option>
+                                <option value="Oman" data-code="+968"></option>
+                                <option value="Pakistan" data-code="+92"></option>
+                                <option value="Palau" data-code="+680"></option>
+                                <option value="Palestinian Authority" data-code="+970"></option>
+                                <option value="Panama" data-code="+507"></option>
+                                <option value="Papua New Guinea" data-code="+675"></option>
+                                <option value="Paraguay" data-code="+595"></option>
+                                <option value="Peru" data-code="+51"></option>
+                                <option value="Philippines" data-code="+63"></option>
+                                <option value="Pitcairn Islands" data-code="+64"></option>
+                                <option value="Poland" data-code="+48"></option>
+                                <option value="Portugal" data-code="+351"></option>
+                                <option value="Puerto Rico" data-code="+1"></option>
+                                <option value="Qatar" data-code="+974"></option>
+                                <option value="Réunion" data-code="+262"></option>
+                                <option value="Romania" data-code="+40"></option>
+                                <option value="Russia" data-code="+7"></option>
+                                <option value="Rwanda" data-code="+250"></option>
+                                <option value="Samoa" data-code="+685"></option>
+                                <option value="San Marino" data-code="+378"></option>
+                                <option value="São Tomé &amp; Príncipe" data-code="+239"></option>
+                                <option value="Saudi Arabia" data-code="+966"></option>
+                                <option value="Senegal" data-code="+221"></option>
+                                <option value="Serbia" data-code="+381"></option>
+                                <option value="Seychelles" data-code="+248"></option>
+                                <option value="Sierra Leone" data-code="+232"></option>
+                                <option value="Singapore" data-code="+65"></option>
+                                <option value="Sint Maarten" data-code="+1"></option>
+                                <option value="Slovakia" data-code="+421"></option>
+                                <option value="Slovenia" data-code="+386"></option>
+                                <option value="Solomon Islands" data-code="+677"></option>
+                                <option value="Somalia" data-code="+252"></option>
+                                <option value="South Africa" data-code="+27"></option>
+                                <option value="South Georgia &amp; South Sandwich Islands" data-code="+500"></option>
+                                <option value="South Sudan" data-code="+211"></option>
+                                <option value="Spain" data-code="+34"></option>
+                                <option value="Sri Lanka" data-code="+94"></option>
+                                <option value="Sudan" data-code="+249"></option>
+                                <option value="Suriname" data-code="+597"></option>
+                                <option value="Svalbard &amp; Jan Mayen" data-code="+47"></option>
+                                <option value="Sweden" data-code="+46"></option>
+                                <option value="Switzerland" data-code="+41"></option>
+                                <option value="Syria" data-code="+963"></option>
+                                <option value="Taiwan" data-code="+886"></option>
+                                <option value="Tajikistan" data-code="+992"></option>
+                                <option value="Tanzania" data-code="+255"></option>
+                                <option value="Thailand" data-code="+66"></option>
+                                <option value="Togo" data-code="+228"></option>
+                                <option value="Tokelau" data-code="+690"></option>
+                                <option value="Tonga" data-code="+676"></option>
+                                <option value="Trinidad &amp; Tobago" data-code="+1"></option>
+                                <option value="Tunisia" data-code="+216"></option>
+                                <option value="Turkey" data-code="+90"></option>
+                                <option value="Turkmenistan" data-code="+993"></option>
+                                <option value="Turks &amp; Caicos Islands" data-code="+1"></option>
+                                <option value="Tuvalu" data-code="+688"></option>
+                                <option value="Uganda" data-code="+256"></option>
+                                <option value="Ukraine" data-code="+380"></option>
+                                <option value="United Arab Emirates" data-code="+971"></option>
+                                <option value="United Kingdom" data-code="+44"></option>
+                                <option value="United States" data-code="+1"></option>
+                                <option value="Uruguay" data-code="+598"></option>
+                                <option value="Uzbekistan" data-code="+998"></option>
+                                <option value="Vanuatu" data-code="+678"></option>
+                                <option value="Vatican City" data-code="+39"></option>
+                                <option value="Venezuela" data-code="+58"></option>
+                                <option value="Vietnam" data-code="+84"></option>
+                                <option value="Wallis &amp; Futuna" data-code="+681"></option>
+                                <option value="Yemen" data-code="+967"></option>
+                                <option value="Zambia" data-code="+260"></option>
+                                <option value="Zimbabwe" data-code="+263"></option>
+                            </datalist>
+                        </div>
+                        <input type="tel" autocomplete="tel" id="phoneNum" name="phonenumber" class="padL" pattern="\d{3,25}" placeholder="012 345 6789..." required>
+                    </div>
+                    <label for="password">Password:</label>
+                    <div class="input">
+                        <input type="password" autocomplete="off" id="password" name="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter password..." required>
+                        <i class="fa fa-eye hide" id="eye-view"></i><i class="fa fa-eye-slash" id="eye-slash"></i>
+                    </div>
+                    <div class="info-div hide" id="pw-info">
+                        <small class="info"><i class="fa fa-warning"></i>Password must contain not less than eight characters.</small>
+                        <small class="info"><i class="fa fa-warning"></i>Password must contain a number.</small>
+                        <small class="info"><i class="fa fa-warning"></i>Password must contain a capital letter.</small>
+                        <small class="info"><i class="fa fa-warning"></i>Password must contain a small letter.</small>
+                    </div>
+                    <h4>Date of birth</h4>
+                    <div class="date-grid">
+                        <div>
+                            <label for="dayOB">Day</label>
+                            <input type="number" autocomplete="bday-day" class="date-input" id="dayOB" name="dayOB" min="1" max="31" maxlength="2" pattern="\d+" placeholder="01" required>
+                        </div>
+                        <div style="padding: 0px 10px;">
+                            <label for="monthOB">Month</label>
+                            <input list="month" class="date-input" placeholder="January" autocomplete="bday-month" id="monthOB" name="monthOB" required>
+                            <datalist id="month">
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </datalist>
+                        </div>
+                        <div>
+                            <label for="yearOB">Year</label>
+                            <input type="number" class="date-input" id="yearOB" autocomplete="bday-year" name="yearOB" min="1950" max="2005" maxlength="4" pattern="\d{4}" placeholder="1970" required>
+                        </div>
+                    </div>
+                    <h4>Gender</h4>
+                    <div class="sexDiv">
+                        <div><input type="radio" value="0" name="male" id="male"><label for="male">Male</label></div>
+                        <div><input type="radio" value="0" name="female" id="female"><label for="female">Female</label></div>
+                    </div>
+                    <p class="signup-agr">By clicking on sign up, you agree to our <a href>Terms and Conditions</a>and <a href>Privacy Policy</a>.</p>
+
+                </div>
+                <button type="submit" id="submit">Sign up</button>
+                <p>Already got an account? <a href="http://localhost:3001/loginjs">Login</a></p>
+                <div class="signup-alt">
+                    <div class="orAlt"><span>OR</span></div>
+                    <a href="" class="a1">
+                        <div style="margin-left: 5%">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                id="Capa_1" style="enable-background:new 0 0 150 150;" 
+                                version="1.1" viewBox="10 5 120 120" 
+                                xml:space="preserve">
+                                <style type="text/css">
+                                .st0{fill:#1A73E8;}
+                                .st1{fill:#EA4335;}
+                                .st2{fill:#4285F4;}
+                                .st3{fill:#FBBC04;}
+                                .st4{fill:#34A853;}
+                                .st5{fill:#4CAF50;}
+                                .st6{fill:#1E88E5;}
+                                .st7{fill:#E53935;}
+                                .st8{fill:#C62828;}
+                                .st9{fill:#FBC02D;}
+                                .st10{fill:#1565C0;}
+                                .st11{fill:#2E7D32;}
+                                .st12{fill:#F6B704;}
+                                .st13{fill:#E54335;}
+                                .st14{fill:#4280EF;}
+                                .st15{fill:#34A353;}
+                                .st16{clip-path:url(#SVGID_2_);}
+                                .st17{fill:#188038;}
+                                .st18{opacity:0.2;fill:#FFFFFF;enable-background:new    ;}
+                                .st19{opacity:0.3;fill:#0D652D;enable-background:new    ;}
+                                .st20{clip-path:url(#SVGID_4_);}
+                                .st21{opacity:0.3;fill:url(#_45_shadow_1_);enable-background:new    ;}
+                                .st22{clip-path:url(#SVGID_6_);}
+                                .st23{fill:#FA7B17;}
+                                .st24{opacity:0.3;fill:#174EA6;enable-background:new    ;}
+                                .st25{opacity:0.3;fill:#A50E0E;enable-background:new    ;}
+                                .st26{opacity:0.3;fill:#E37400;enable-background:new    ;}
+                                .st27{fill:url(#Finish_mask_1_);}
+                                .st28{fill:#FFFFFF;}
+                                .st29{fill:#0C9D58;}
+                                .st30{opacity:0.2;fill:#004D40;enable-background:new    ;}
+                                .st31{opacity:0.2;fill:#3E2723;enable-background:new    ;}
+                                .st32{fill:#FFC107;}
+                                .st33{opacity:0.2;fill:#1A237E;enable-background:new    ;}
+                                .st34{opacity:0.2;}
+                                .st35{fill:#1A237E;}
+                                .st36{fill:url(#SVGID_7_);}
+                                .st37{fill:#FBBC05;}
+                                .st38{clip-path:url(#SVGID_9_);fill:#E53935;}
+                                .st39{clip-path:url(#SVGID_11_);fill:#FBC02D;}
+                                .st40{clip-path:url(#SVGID_13_);fill:#E53935;}
+                                .st41{clip-path:url(#SVGID_15_);fill:#FBC02D;}
+                                </style>
+                                <g>
+                                    <path class="st14" d="M120,76.1c0-3.1-0.3-6.3-0.8-9.3H75.9v17.7h24.8c-1,5.7-4.3,10.7-9.2,13.9l14.8,11.5   C115,101.8,120,90,120,76.1L120,76.1z"/>
+                                    <path class="st15" d="M75.9,120.9c12.4,0,22.8-4.1,30.4-11.1L91.5,98.4c-4.1,2.8-9.4,4.4-15.6,4.4c-12,0-22.1-8.1-25.8-18.9   L34.9,95.6C42.7,111.1,58.5,120.9,75.9,120.9z"/>
+                                    <path class="st12" d="M50.1,83.8c-1.9-5.7-1.9-11.9,0-17.6L34.9,54.4c-6.5,13-6.5,28.3,0,41.2L50.1,83.8z"/>
+                                    <path class="st13" d="M75.9,47.3c6.5-0.1,12.9,2.4,17.6,6.9L106.6,41C98.3,33.2,87.3,29,75.9,29.1c-17.4,0-33.2,9.8-41,25.3   l15.2,11.8C53.8,55.3,63.9,47.3,75.9,47.3z"/>
+                                </g>
+                            </svg></div>
+                        <div aria-label="Sign up with google">Sign up with Google</div>
+                    </a>
+                    <a href="" class="a2">
+                        <div style="margin-left: 7%; font-size: 25px;"><i class="fa fa-facebook-official"></i></div>
+                        <div aria-label="Sign up with facebook">Sign up with Facebook</div>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+<script src="/login/loginScr.js"></script>
+</html>

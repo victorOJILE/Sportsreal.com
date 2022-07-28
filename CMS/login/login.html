@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportsreal CMS</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        @font-face {
+    font-family: "Roboto-Light";
+    src: url(Roboto-Medium.ttf);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto-Light", Arial, Helvetica, sans-serif;
+    letter-spacing: .03rem;
+    text-shadow: none;
+}
+.center, header, .login {
+    text-align: center;
+}
+.fa-upload { margin-right: 5px }
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+a {
+    color: #9292ff;
+    outline: none;
+    padding: 2px;
+    cursor: pointer;
+    -webkit-transition: background-color 600ms;
+    -moz-transition: background-color 600ms;
+    -o-transition: background-color 600ms;
+    transition: background-color 600ms;
+}
+a:hover, a:focus {
+    background-color: transparent;
+    color: white;
+}
+.white { color: rgb(97, 97, 97) }
+button {
+    border-radius: 0px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-transition: background-color 600ms;
+    -moz-transition: background-color 600ms;
+    -o-transition: background-color 600ms;
+    transition: background-color 600ms;
+}
+.login, .id-div, .center button, .enter-news button, .textarea, .help-descr, .edit-text button, .ol ul li {
+    font-weight: 500;
+}
+header {
+    width: 100%;
+    font-size: 8vw;
+    font-family: cursive;
+    background-color: rgb(0, 0, 0);
+    background:-moz-linear-gradient();
+    color: white;
+    padding: 2vh 0;
+}
+.form-body {
+    background: #0000bb repeating-radial-gradient(circle closest-side at center center, #010146 -50%, #00003e 120vw);
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 5rem;
+}
+.login {
+    font-size: 18px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
+    padding: 15px 0;
+}
+form {
+    max-width: 35rem;
+    margin: 0rem auto;
+    padding: 2rem 0rem;
+    background: #00005a repeating-radial-gradient(circle closest-side at center center, #080875 -50%, #01011b 100vw);
+    border-radius: 10px;
+}
+select {
+    width: 100%;
+    padding: 0.7rem;
+    color: rgb(0, 0, 0);
+    background-color: #ededed;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+.option {
+    background-color: white;
+    color: rgb(65, 45, 78);
+    font-weight: 500;
+}
+.id-div {
+    width: 80%;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    text-align: left;
+    margin: 2rem auto;
+}
+.id-div label {
+    display: block;
+    padding: 20px 0px 5px;
+    font-size: 0.8rem;
+}
+.center input {
+    width: 100%;
+    border: none;
+    padding: 0.7rem;
+    font-size: 13px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+.input {
+    background-color: #ededed;
+    outline: none;
+    border-radius: 5px;
+}
+.input:hover, .input:focus, .input:active {
+    background-color: rgb(243, 238, 168);
+}
+.center p {
+    font-size: 0.7rem;
+    margin: 0;
+    color: rgb(238, 237, 237);
+}
+.center button {
+    width: 50%;
+    max-width: 10rem;
+    padding: 10px;
+    margin-bottom: 1rem;
+    margin-top: 0.8rem;
+    cursor: pointer;
+    outline: none;
+    border: 3px solid #788dff;
+    border-radius: 6px;
+    background-color: #01013a;
+    color: white;
+}
+.center button:hover, .center button:focus {
+    background-color: #010155;
+}
+.center button:active {
+    background-color: rgb(1, 39, 29);
+}
+@media (min-width: 500px) {
+    .center {
+        padding-top: 2rem;
+    }
+}
+@media (min-width: 750px) {
+    header {
+        font-size: 60px;
+    }
+    form {
+        box-shadow: 0px 0px 0px 4px #00035f;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        Login
+    </header>
+    <section class="form-body">
+        <div class="center">
+            <form action="http://localhost:3001/loginjs" method="post" name="form" role="form">
+                <div class="id-div">
+                    <label for="role">Login as:</label>
+                        <select name="rank" id="role">
+                        <option value="Admin" class="option" selected>Admin</option>
+                        <option value="Writer" class="option">Writer</option>
+                    </select>
+                    <label for="username">Username: </label>
+                    <div class="input"><input type="text" id="username" name="username" minlength="8" maxlength="15" placeholder="Enter username..." required></div>
+                    <label for="psw">Password: </label>
+                    <div class="input">
+                        <input type="password" id="password" name="password" minlength="8" maxlength="30" placeholder="Enter password..." required>
+                    </div>
+                </div>
+                <button type="submit" id="submit">Login</button>
+                <p><a href="">Forgot password</a>. New user, <a href="">Sign up</a></p>
+            </form>
+        </div>
+    </section>
+</body>
+<script src="/login/loginScr.js"></script>
+</html>
